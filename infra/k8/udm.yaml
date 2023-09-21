@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: udm-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: udm
+  template:
+    metadata:
+      labels:
+        app: udm
+    spec:
+      containers:
+        - name: udm-container
+          image: saiganesh03/a5gmicroservice-udm
+          ports:
+            - containerPort: 3000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: udm-service
+spec:
+  selector:
+    app: udm
+  ports:
+    - protocol: TCP
+      port: 3000
+      targetPort: 3000

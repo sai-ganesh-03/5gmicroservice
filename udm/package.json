@@ -1,0 +1,16 @@
+{
+  "name": "udm",
+  "version": "1.0.0",
+  "description": "",
+  "main": "udm.js",
+  "scripts": {
+    "start": "node udm.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.20.2",
+    "express": "^4.18.2",
+    "jsonwebtoken": "^9.0.2"
+  }
+}

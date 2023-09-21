@@ -1,0 +1,34 @@
+apiVersion: skaffold/v2alpha3
+kind: Config
+deploy:
+  kubectl:
+    manifests:
+      - ./infra/k8/*
+build:
+  local:
+    push: false
+  artifacts:
+    - image: saiganesh03/a5gmicroservice-amf
+      context: amf
+      docker:
+        dockerfile: dockerfile
+      sync:
+        manual:
+          - src: "*.js"
+            dest: .
+    - image: saiganesh03/a5gmicroservice-nrf
+      context: nrf
+      docker:
+        dockerfile: dockerfile
+      sync:
+        manual:
+          - src: "*.js"
+            dest: .
+    - image: saiganesh03/a5gmicroservice-udm
+      context: udm
+      docker:
+        dockerfile: dockerfile
+      sync:
+        manual:
+          - src: "*.js"
+            dest: .

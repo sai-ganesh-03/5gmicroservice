@@ -5,7 +5,8 @@ const port = 3000;
 
 // Simulated service registration information (replace with actual data)
 const serviceRegistry = {
-  registration: "udm-service:3000", // Map the 'registration' service to the UDM microservice
+  registration: "udm-service:3000",
+  af: "af-service:3000", // Map the 'registration' service to the UDM microservice
   // Add more service mappings as needed
 };
 

@@ -88,7 +88,28 @@ app.post("/login", async (req, res) => {
 });
 
 // Add routes for other functionalities, if needed
+app.get("/af", async (req, res) => {
+  try {
+    // Retrieve the service registry information from NRF
+    const response = await axios.get(`${nrfServiceUrl}/service-registry`);
+    const serviceRegistry = response.data;
 
+    // Check if the service name 'registration' is in the registry
+    const serviceName = serviceRegistry["af"];
+
+    if (!serviceName) {
+      res.status(500).send("Service not found");
+      return;
+    }
+
+    // Forward the request to the appropriate microservice (UDM in this case)
+    const serviceResponse = await axios.get(`http://${serviceName}/af`);
+    res.json(serviceResponse.data.msg);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Internal Server Error");
+  }
+});
 app.listen(port, () => {
   console.log(`AMF microservices is running on port ${port}`);
 });

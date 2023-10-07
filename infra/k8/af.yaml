@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: af-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: af
+  template:
+    metadata:
+      labels:
+        app: af
+    spec:
+      containers:
+        - name: af-container
+          image: saiganesh03/a5gmicroservice-af
+          ports:
+            - containerPort: 3000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: af-service
+spec:
+  selector:
+    app: af
+  ports:
+    - protocol: TCP
+      port: 3000
+      targetPort: 3000
